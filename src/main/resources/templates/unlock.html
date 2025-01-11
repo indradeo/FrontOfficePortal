@@ -50,15 +50,15 @@
             <form th:action="@{/unlock-account}" th:method="POST">
                 <div class="form-group">
                     <label for="tempPwd">Temporary Password</label>
-                    <input type="text" name="tempPwd"  class="form-control" id="tempPwd" aria-describedby="emailHelp">
+                    <input type="password" name="tempPwd"  class="form-control" id="tempPwd" aria-describedby="emailHelp">
                 </div>
                 <div class="form-group">
                     <label for="newPwd">New Password</label>
-                    <input type="text" name="newPwd"  class="form-control" id="newPwd" >
+                    <input type="password" name="newPwd"  class="form-control" id="newPwd" >
                 </div>
                 <div class="form-group">
                     <label for="cnfPwd">Confirm Password</label>
-                    <input type="text" class="form-control" id="cnfPwd" name="cnfPwd">
+                    <input type="password" class="form-control" id="cnfPwd" name="cnfPwd">
                 </div>
                 <div class="form-group">
 
