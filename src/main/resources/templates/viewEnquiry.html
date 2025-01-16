@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -9,7 +9,7 @@
     <title>DIT</title>
 </head>
 <body>
-<div class="container"  >
+<div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light " >
         <a class="navbar-brand" href="/dashboard">
             <img class="" width="80px" height="60px" src="images/logo2.webp">
@@ -33,42 +33,38 @@
 
             </ul>
 
-            <a class="btn btn-danger my-2 my-sm-0" href="/">Logout</a>
+            <a class="btn btn-danger my-2 my-sm-0" href="logout">Logout</a>
         </div>
     </nav>
 </div>
-<div class="container">
-    <div class="row">
+<div class="container mt-5  pt-4">
+    <h3 class="text-center">View Student Enquiries</h3>
+    <div class="row ml-4 mr-4">
         <div class="form-group col-md-4">
             <label for="course">Course</label>
             <select class="form-control" id="course">
-                <option>option1</option>
-                <option>option1</option>
-                <option>option1</option>
-                <option>option1</option>
+                <option>-select-</option>
+                <option th:each="course : ${courses}" th:text="${course}" th:value="${course}"></option>
+
             </select>
         </div>
         <div class="form-group col-md-4">
             <label for="status">Enquiry Status</label>
-            <select class="form-control" id="status">
-                <option>option1</option>
-                <option>New</option>
-                <option>Enrolled</option>
-                <option>Lost</option>
+            <select class="form-control" id="status" name="status">
+                <option>-select-</option>
+                <option th:each="status : ${enqStatus}" th:text="${status}" th:value="${status}"></option>
             </select>
         </div>
         <div class="form-group col-md-4">
             <label for="classMode">Class Mode</label>
-            <select class="form-control" id="classMode">
-                <option>option1</option>
-                <option>Online</option>
+            <select class="form-control" id="classMode" name="classMode">
+                <option>-select-</option>
+                <option >Online</option>
                 <option>Offline</option>
             </select>
         </div>
     </div>
-</div>
-
-<div class="container">
+<div class="row ml-4 mr-5">
     <table class="table">
         <thead>
         <tr>
@@ -82,46 +78,17 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>JavaFullStack</td>
-            <td>0987654321</td>
-            <td>09-01-25</td>
-            <td>New</td>
-            <td><button class="btn btn-primary">Edit</button></td>
-        </tr>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>JavaFullStack</td>
-            <td>0987654321</td>
-            <td>09-01-25</td>
-            <td>New</td>
-            <td><button class="btn btn-primary">Edit</button></td>
-        </tr>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>JavaFullStack</td>
-            <td>0987654321</td>
-            <td>09-01-25</td>
-            <td>New</td>
-            <td><button class="btn btn-primary">Edit</button></td>
-        </tr>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>JavaFullStack</td>
-            <td>0987654321</td>
-            <td>09-01-25</td>
-            <td>New</td>
-            <td><button class="btn btn-primary">Edit</button></td>
-        </tr>
-
+        <tr th:each="enquiry, stat : ${enquiries}">
+            <th scope="row" th:text="${stat.index+1}"></th>
+            <td th:text="${enquiry.name}"></td>
+            <td th:text="${enquiry.course}" ></td>
+            <td th:text="${enquiry.contact}" ></td>
+            <td th:text="${enquiry.creationDate}" ></td>
+            <td th:text="${enquiry.enquiryStatus}" ></td>
+            <td><a th:href="@{addEnquiry(id=${enquiry.id})}" class="btn btn-primary">Edit</a></td>
     </table>
 </div>
-
+</div>
 <div class="container ">
     <div class="card text-center">
         <div class="card-footer text-muted">

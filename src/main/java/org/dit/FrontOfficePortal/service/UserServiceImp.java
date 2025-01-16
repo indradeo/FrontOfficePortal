@@ -1,5 +1,6 @@
 package org.dit.FrontOfficePortal.service;
 
+import jakarta.servlet.http.HttpSession;
 import org.dit.FrontOfficePortal.binding.LoginForm;
 import org.dit.FrontOfficePortal.binding.SignUp;
 import org.dit.FrontOfficePortal.binding.UnlockAccount;
@@ -25,6 +26,8 @@ public class UserServiceImp implements UserService {
     @Autowired
     private EmailUtils emailUtils;
 
+    @Autowired
+    private HttpSession session;
 
     @Override
     public String login(LoginForm loginForm) {
@@ -35,6 +38,7 @@ public class UserServiceImp implements UserService {
         if (user.getAccountStatus().equals("LOCKED")) {
             return "Your Account is Locked, check your email to unlock your account";
         }
+        session.setAttribute("userId",user.getUserId());
         return "success";
     }
 
@@ -99,7 +103,6 @@ public class UserServiceImp implements UserService {
             String body="Your Password is : "+user.get().getPassword();
 
             emailUtils.sendMail(to, Subject, body);
-
             return "success";
         }
 

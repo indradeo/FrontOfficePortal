@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -33,7 +33,7 @@
 
             </ul>
 
-            <a class="btn btn-danger my-2 my-sm-0" href="/">Logout</a>
+            <a class="btn btn-danger my-2 my-sm-0" href="logout">Logout</a>
         </div>
     </nav>
 </div>
@@ -41,38 +41,36 @@
     <div class="col-md-2"></div>
     <div class="col-md-4 bg-transparent   text-dark ">
         <h4>Add Enquiry</h4>
-        <form>
+        <form th:action="@{/addEnquiry}" th:object="${enquiryForm}" th:method="POST">
+            <input th:field="*{id}" hidden="hidden">
             <div class="form-group">
                 <label for="name">Student Name</label>
-                <input type="text" name="name" class="form-control" id="name" >
+                <input type="text" name="name" class="form-control" id="name" th:field="*{name}">
             </div>
             <div class="form-group">
                 <label for="contact">Contact</label>
-                <input type="Number" class="form-control" id="contact" name="contact">
+                <input type="text" class="form-control" id="contact" name="contact" th:field="*{contact}" >
             </div>
             <div class="form-group">
-                <label for="courses">Courses</label>
-                <select id="courses" name="courses" class="form-control">
-                    <option>-Select-</option>
-                    <option>Java</option>
-                    <option>AWS</option>
+                <label for="course">Courses</label>
+                <select id="course" name="course" class="form-control" th:field="*{course}">
+                    <option value="">-select-</option>
+                    <option th:each="course : ${courses}" th:text="${course}" th:value="${course}"></option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="classMode">Class Mode</label>
-                <select id="classMode" name="classMode" class="form-control">
-                    <option>-Select-</option>
-                    <option>Online</option>
-                    <option>Offline</option>
+                <select id="classMode" name="classMode" class="form-control" th:field="*{mode}">
+                    <option value="">-Select-</option>
+                    <option value="Online">Online</option>
+                    <option value="Offline">Offline</option>
                 </select>
             </div>
             <div class="form-group">
-                <label for="status">Enquiry Status</label>
-                <select id="status" name="status" class="form-control">
-                    <option>-Select-</option>
-                    <option>New</option>
-                    <option>Enrolled</option>
-                    <option>Lost</option>
+                <label for="enquiryStatus">Enquiry Status</label>
+                <select id="enquiryStatus" name="enquiryStatus" class="form-control" th:field="*{enquiryStatus}">
+                    <option value="">-select-</option>
+                    <option th:each="status : ${enqStatus}" th:text="${status}" th:value="${status}"></option>
                 </select>
             </div>
             <div class="form-group">

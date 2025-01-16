@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -33,17 +33,18 @@
 
             </ul>
 
-            <a class="btn btn-danger my-2 my-sm-0" href="/">Logout</a>
+            <a class="btn btn-danger my-2 my-sm-0" href="logout">Logout</a>
         </div>
     </nav>
 </div>
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-6 text-center">
+            <h2 th:text="${username}"></h2>
             <h3>Your Performance</h3>
-            <p class="text-info">Total Enquiries: </p>
-            <p class="text-success">Enrolled : </p>
-            <p class="text-danger">Lost : </p>
+            <p class="text-info">Total Enquiries: [[${totalEnq}]] </p>
+            <p class="text-success">Enrolled : [[${enrolledEnq}]]</p>
+            <p class="text-danger">Lost : [[${lostEnq}]] </p>
         </div>
         <div class="col-md-6">
             <img src="/images/lady.jpg" >

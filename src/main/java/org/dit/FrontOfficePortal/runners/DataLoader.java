@@ -18,27 +18,28 @@ public class DataLoader implements ApplicationRunner {
     private CourseRepo courseRepo;
     @Autowired
     private EnquiryStatusRepo statusRepo;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
 
-        Course course1=new Course();
+        Course course1 = new Course();
         course1.setCourseName("AWS");
-        Course course2=new Course();
+        Course course2 = new Course();
         course2.setCourseName("Java Fullstack");
-        Course course3=new Course();
+        Course course3 = new Course();
         course3.setCourseName("DevOps");
 
-        EnquiryStatus enq1=new EnquiryStatus();
+        EnquiryStatus enq1 = new EnquiryStatus();
         enq1.setStatus("New");
 
-        EnquiryStatus enq2=new EnquiryStatus();
+        EnquiryStatus enq2 = new EnquiryStatus();
         enq2.setStatus("Enrolled");
 
-        EnquiryStatus enq3=new EnquiryStatus();
+        EnquiryStatus enq3 = new EnquiryStatus();
         enq3.setStatus("Lost");
 
-        //courseRepo.saveAll(Arrays.asList(course1,course2,course3));
-        //statusRepo.saveAll(Arrays.asList(enq1,enq2,enq3));
+        //courseRepo.saveAll(Arrays.asList(course1, course2, course3));
+        //statusRepo.saveAll(Arrays.asList(enq1, enq2, enq3));
     }
 }
