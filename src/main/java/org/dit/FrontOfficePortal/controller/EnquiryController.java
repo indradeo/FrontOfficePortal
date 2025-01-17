@@ -2,15 +2,13 @@ package org.dit.FrontOfficePortal.controller;
 
 import jakarta.servlet.http.HttpSession;
 import org.dit.FrontOfficePortal.binding.DashboardResponse;
+import org.dit.FrontOfficePortal.binding.EnquirySearchCriteria;
 import org.dit.FrontOfficePortal.entity.StudentEnquiry;
 import org.dit.FrontOfficePortal.service.EnquiryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -79,5 +77,23 @@ public class EnquiryController {
         model.addAttribute("enqStatus", enquiryService.getEnquiryStatus());
 
         return "viewEnquiry";
+    }
+
+    @GetMapping("/getData")
+    public String getData(@ModelAttribute EnquirySearchCriteria searchCriteria, Model model){
+
+       Integer userId= (Integer)session.getAttribute("userId");
+       List<StudentEnquiry> enquiries= enquiryService.getEnquiries(userId, searchCriteria);
+       model.addAttribute("enquiries", enquiries);
+       return "filter-page";
+
+    }
+
+    @GetMapping("/getEnquiries")
+    @ResponseBody
+    public List<StudentEnquiry> getAllEnquiries(){
+        Integer userId = (Integer)session.getAttribute("userId");
+        return enquiryService.getEnquiries(userId);
+
     }
 }

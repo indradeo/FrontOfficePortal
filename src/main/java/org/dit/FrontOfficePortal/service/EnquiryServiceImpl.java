@@ -11,10 +11,12 @@ import org.dit.FrontOfficePortal.repo.StudentEnquiryRepo;
 import org.dit.FrontOfficePortal.repo.UserDetailsRepo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class EnquiryServiceImpl  implements EnquiryService{
@@ -65,7 +67,30 @@ public class EnquiryServiceImpl  implements EnquiryService{
 
     @Override
     public List<StudentEnquiry> getEnquiries(Integer userId, EnquirySearchCriteria criteria) {
-        return List.of();
+
+       List<StudentEnquiry> enquiries= userDetailsRepo.findById(userId).get().getEnquiries();
+
+        System.out.println(enquiries);
+        System.out.println("course="+criteria.getCourse());
+        System.out.println("Status="+criteria.getEnquiryStatus());
+
+        //filter Logic
+        if(null!=criteria.getCourse() && !"-select-".equals(criteria.getCourse())){
+            enquiries= enquiries.stream().filter(e->e.getCourse().equals(criteria.getCourse())).collect(Collectors.toList());
+
+        }
+        if(null!=criteria.getMode() && !"-select-".equals(criteria.getMode())){
+            enquiries= enquiries.stream().filter(e->e.getMode().equals(criteria.getMode())).collect(Collectors.toList());
+
+        }
+        if(null!=criteria.getEnquiryStatus() && !"-select-".equals(criteria.getEnquiryStatus())){
+            enquiries= enquiries
+                    .stream()
+                    .filter(e->e.getEnquiryStatus()
+                            .equals(criteria.getEnquiryStatus())).collect(Collectors.toList());
+
+        }
+        return  enquiries;
     }
 
     @Override

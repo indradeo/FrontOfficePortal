@@ -3,7 +3,7 @@ package org.dit.FrontOfficePortal.binding;
 public class EnquirySearchCriteria {
 
     private String course;
-    private String status;
+    private String enquiryStatus;
     private String mode;
 
     public String getCourse() {
@@ -22,11 +22,11 @@ public class EnquirySearchCriteria {
         this.mode = mode;
     }
 
-    public String getStatus() {
-        return status;
+    public String getEnquiryStatus() {
+        return enquiryStatus;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setEnquiryStatus(String enquiryStatus) {
+        this.enquiryStatus = enquiryStatus;
     }
 }

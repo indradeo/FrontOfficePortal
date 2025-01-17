@@ -1,5 +1,6 @@
 package org.dit.FrontOfficePortal.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -91,6 +92,14 @@ public class StudentEnquiry {
         this.user = user;
     }
 
+    public UserDetails getUser() {
+        return user;
+    }
+
+    public void setUser(UserDetails user) {
+        this.user = user;
+    }
+
     public String getMode() {
         return mode;
     }
@@ -109,7 +118,6 @@ public class StudentEnquiry {
                 ", updationDate=" + updationDate +
                 ", course='" + course + '\'' +
                 ", enquiryStatus='" + enquiryStatus + '\'' +
-                ", user=" + user +
                 '}';
     }
 }
