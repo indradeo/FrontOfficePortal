@@ -46,7 +46,7 @@
         <div class="col-md-4 bg-transparent   text-dark ">
             <h4>Create Your Account here</h4>
 
-            <form th:action="@{/createAccount}" th:object="${signUp}"th:method="POST">
+            <form th:action="@{/signup}" th:object="${signUp}"th:method="POST">
                 <div class="form-group">
                     <label for="name">FullName</label>
                     <input type="text" name="name" th:field="*{name}" class="form-control" id="name" aria-describedby="emailHelp">
@@ -58,7 +58,7 @@
                 </div>
                 <div class="form-group">
                     <label for="contact">Contact</label>
-                    <input type="Number" class="form-control" th:field="*{contact}" id="contact" name="contact">
+                    <input type="text" class="form-control" th:field="*{contact}" id="contact" name="contact">
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary mb-4 form-control">Create Account</button>

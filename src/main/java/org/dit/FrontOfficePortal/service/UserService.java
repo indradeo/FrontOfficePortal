@@ -16,5 +16,4 @@ public interface UserService {
 
    String forgotPassword(String email);
 
-   boolean validateUser(LoginForm loginForm);
 }

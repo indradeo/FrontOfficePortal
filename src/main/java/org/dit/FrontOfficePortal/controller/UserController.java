@@ -23,6 +23,18 @@ public class UserController {
         return "login";
     }
 
+    @PostMapping("/login")
+    public String validateUser(@ModelAttribute LoginForm loginForm,Model model){
+        String status=userService.login(loginForm);
+        if(status.contains("success")){
+            return "redirect:/dashboard";
+        }
+
+        model.addAttribute("errMsg", status);
+
+        return "/login";
+
+    }
     @GetMapping("/signup")
     public String SignUpPage(SignUp signUp){
 
@@ -40,7 +52,20 @@ public class UserController {
         return "forgotPwd";
     }
 
-    @PostMapping("/createAccount")
+    @PostMapping("/forgot-password")
+    public String resetPassword(@RequestParam("email") String email, Model model){
+
+       String status= userService.forgotPassword(email);
+       if(status.contains("success")){
+           model.addAttribute("msg","password sent to your email");
+       }else{
+           model.addAttribute("errMsg",status);
+       }
+
+        return "forgotPwd";
+    }
+
+    @PostMapping("/signup")
     public String createAccount(@ModelAttribute SignUp signUp, Model model){
         boolean res=userService.signup(signUp);
         if(!res){
@@ -67,13 +92,4 @@ public class UserController {
         return "login";
     }
 
-    @PostMapping("/validate-user")
-    public String validateUser(LoginForm loginForm){
-
-        if(!userService.validateUser(loginForm)){
-            return "login";
-        }
-
-        return "redirect:/dashboard";
-    }
 }

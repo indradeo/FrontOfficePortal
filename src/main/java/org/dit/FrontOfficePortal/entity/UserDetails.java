@@ -1,9 +1,8 @@
 package org.dit.FrontOfficePortal.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class UserDetails {
@@ -17,6 +16,8 @@ public class UserDetails {
     private String password;
     private String accountStatus;
 
+    @OneToMany(mappedBy = "user")
+    private List<StudentEnquiry> enquiries;
     public String getAccountStatus() {
         return accountStatus;
     }
@@ -63,5 +64,13 @@ public class UserDetails {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public List<StudentEnquiry> getEnquiries() {
+        return enquiries;
+    }
+
+    public void setEnquiries(List<StudentEnquiry> enquiries) {
+        this.enquiries = enquiries;
     }
 }

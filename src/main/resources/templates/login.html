@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -45,14 +45,15 @@
     <div class="col-md-2"></div>
     <div class="col-md-4 bg-transparent">
         <h4>Login here</h4>
-    <form action="/dashboard" method="GET">
+    <form th:action="@{/login}"  method="POST">
+        <p th:text="${errMsg}" class="text-danger"></p>
         <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" name="email">
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
+            <label for="password">Password</label>
+            <input type="password" name="password" class="form-control" pattern="*" id="password">
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary mb-4 form-control">Login</button>
